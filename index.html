@@ -1,49 +1,91 @@
-<!doctype html><html lang="de"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CGAI – Home</title>
-<link rel="icon" href="assets/img/favicon.ico">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;800&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Start – CGAI</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
-<script src="js/i18n.js" defer></script>
-</head><body>
-<header>
-  <div class="container top">
-    <div class="brand">
-      <img src="assets/img/logo.png" alt="Logo">
-      <div class="name">CGAI</div>
-    </div>
-    <nav>
-      <a href="index.html" data-i18n="nav_home">Start</a>
-      <a href="krypto.html" data-i18n="nav_krypto">Krypto</a>
-      <a href="shop.html" data-i18n="nav_shop">Shop</a>
-      <a href="blog.html" data-i18n="nav_blog">Blog</a>
-      <a href="about.html" data-i18n="nav_about">Über uns</a>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <!-- Brand -->
+    <a class="brand" href="index.html" aria-label="CGAI Startseite">
+      <img class="brand__logo" src="assets/img/logo-gold.png" alt="CGAI Logo" />
+      <span class="brand__wordmark">CGAI</span>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="nav" aria-label="Hauptnavigation">
+      <button class="nav__toggle" aria-expanded="false" aria-controls="navMenu" aria-label="Menü öffnen">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="navMenu" class="nav__list">
+        <li><a href="index.html">Start</a></li>
+        <li><a href="krypto.html">Krypto</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">Über uns</a></li>
+      </ul>
     </nav>
-    <div class="spacer"></div>
-    <div class="lang">
-      <button id="lang-de"><img src="assets/flags/de.svg" alt="DE">DE</button>
-      <button id="lang-en"><img src="assets/flags/en.svg" alt="EN">EN</button>
+
+    <!-- Actions -->
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Sprache wählen">
+        <button class="lang-btn" data-lang="de" aria-pressed="true">🇩🇪 <span>DE</span></button>
+        <button class="lang-btn" data-lang="en" aria-pressed="false">🇬🇧 <span>EN</span></button>
+      </div>
+      <a class="btn btn--gold btn--login" href="login.html">Login</a>
     </div>
-    <div class="auth"><a href="login.html" data-i18n="nav_login">Login</a></div>
   </div>
 </header>
-<section class="hero">
+
+<main>
+  <div class="container section">
+    <h1>Willkommen bei CGAI</h1><p>High‑End Navigationssystem für Kryptomärkte. (Diese Version liefert den neuen, stabilen Header.)</p>
+  </div>
+</main>
+<footer class="site-footer">
   <div class="container">
-    <h1 data-i18n="hero_title">CGAI – Das Navigationssystem für den Kryptomarkt.</h1>
-    <p class="lead" data-i18n="hero_lead">Wir kombinieren Daten, Regeln und Modell‑Prognosen. Klar, diszipliniert, ohne FOMO.</p>
-    <div class="section">
-      <h2 data-i18n="home_h2">Wer wir sind – was wir machen – was uns besonders macht</h2>
-      <p data-i18n="home_p">CGAI ist ein KI‑unterstütztes Navigationssystem ...</p>
-      <div style="margin-top:12px">
-        <a class="btn" href="krypto.html" data-i18n="cta_krypto">Zur Marktübersicht</a>
-        <a class="btn ghost" href="about.html" data-i18n="cta_about">Mehr über uns</a>
-      </div>
+    <div>© 2025 CGAI</div>
+    <div>
+      <a href="disclaimer.html">Disclaimer</a> ·
+      <a href="terms.html">Nutzungsbedingungen</a> ·
+      <a href="privacy.html">Datenschutz</a>
     </div>
   </div>
-</section>
-<footer><div class="container row">
-  <div>© 2025 CGAI</div>
-  <div class="small"><a href="disclaimer.html" data-i18n="foot_disclaimer">Disclaimer</a> · <a href="terms.html" data-i18n="foot_terms">Nutzungsbedingungen</a> · <a href="privacy.html" data-i18n="foot_privacy">Datenschutz</a></div>
-</div></footer>
-</body></html>
+</footer>
+<script>
+  // Mobile Menü
+  (function(){
+    const toggle = document.querySelector('.nav__toggle');
+    const menu = document.getElementById('navMenu');
+    if (toggle && menu){
+      toggle.addEventListener('click', () => {
+        const open = menu.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
+    // Aktiver Link markieren
+    const here = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav__list a').forEach(a=>{
+      if(a.getAttribute('href')===here){ a.style.borderBottomColor = 'var(--gold)'; a.style.color='var(--gold)'; }
+    });
+    // Sprache speichern/setzen
+    const langBtns = document.querySelectorAll('.lang-btn');
+    const setLang = (lng) => {
+      localStorage.setItem('cgai_lang', lng);
+      langBtns.forEach(b=>b.setAttribute('aria-pressed', b.dataset.lang===lng ? 'true':'false'));
+      if (window.CGAIi18n && typeof window.CGAIi18n.setLanguage==='function'){
+        window.CGAIi18n.setLanguage(lng);
+      }
+    };
+    const saved = localStorage.getItem('cgai_lang') || 'de';
+    setLang(saved);
+    langBtns.forEach(b=>b.addEventListener('click', ()=> setLang(b.dataset.lang)));
+  })();
+</script>
+
+</body>
+</html>
